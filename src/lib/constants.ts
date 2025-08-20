@@ -54,6 +54,7 @@ export const SESSION_COLUMNS = [
   'country',
   'city',
   'region',
+  'ip',
 ];
 
 export const FILTER_GROUPS = {
@@ -75,6 +76,7 @@ export const FILTER_COLUMNS = {
   country: 'country',
   region: 'region',
   city: 'city',
+  ip: 'ip',
   language: 'language',
   event: 'event_name',
   tag: 'tag',

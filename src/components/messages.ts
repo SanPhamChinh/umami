@@ -152,6 +152,7 @@ export const labels = defineMessages({
   title: { id: 'label.title', defaultMessage: 'Title' },
   view: { id: 'label.view', defaultMessage: 'View' },
   cities: { id: 'label.cities', defaultMessage: 'Cities' },
+  ipAddress: { id: 'label.ip-address', defaultMessage: 'IP Address' },
   regions: { id: 'label.regions', defaultMessage: 'Regions' },
   reports: { id: 'label.reports', defaultMessage: 'Reports' },
   eventData: { id: 'label.event-data', defaultMessage: 'Event data' },

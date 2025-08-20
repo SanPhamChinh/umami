@@ -17,6 +17,7 @@ import RegionsTable from '@/components/metrics/RegionsTable';
 import ScreenTable from '@/components/metrics/ScreenTable';
 import TagsTable from '@/components/metrics/TagsTable';
 import ChannelsTable from '@/components/metrics/ChannelsTable';
+import IpAddressTable from '@/components/metrics/IpAddressTable';
 import styles from './WebsiteExpandedView.module.css';
 
 const views = {
@@ -34,6 +35,7 @@ const views = {
   country: CountriesTable,
   region: RegionsTable,
   city: CitiesTable,
+  ip: IpAddressTable,
   language: LanguagesTable,
   event: EventsTable,
   query: QueryParametersTable,
@@ -101,6 +103,11 @@ export default function WebsiteExpandedView({
       key: 'city',
       label: formatMessage(labels.cities),
       url: renderUrl({ view: 'city' }),
+    },
+    {
+      key: 'ip',
+      label: formatMessage(labels.ipAddress),
+      url: renderUrl({ view: 'ip' }),
     },
     {
       key: 'language',

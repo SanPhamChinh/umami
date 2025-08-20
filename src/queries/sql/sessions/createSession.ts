@@ -16,6 +16,7 @@ export async function createSession(
     country,
     region,
     city,
+    ip,
     distinctId,
   } = data;
 
@@ -32,6 +33,7 @@ export async function createSession(
         country,
         region,
         city,
+        ip,
         distinctId,
       },
     });

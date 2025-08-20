@@ -117,6 +117,7 @@ export async function POST(request: Request) {
           country,
           region,
           city,
+          ip,
           distinctId: id,
         },
         { skipDuplicates: true },
@@ -201,6 +202,7 @@ export async function POST(request: Request) {
         country,
         region,
         city,
+        ip,
 
         // Events
         eventName: name,

@@ -13,6 +13,7 @@ export const filterParams = {
   country: z.string().optional(),
   region: z.string().optional(),
   city: z.string().optional(),
+  ip: z.string().optional(),
   tag: z.string().optional(),
   host: z.string().optional(),
   language: z.string().optional(),
