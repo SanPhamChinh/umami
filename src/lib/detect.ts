@@ -16,31 +16,40 @@ import { safeDecodeURIComponent } from '@/lib/url';
 const MAXMIND = 'maxmind';
 
 export function getIpAddress(headers: Headers) {
-  const customHeader = process.env.CLIENT_IP_HEADER;
+  // 1. 首先尝试获取 Cloudflare 的真实 IP
+  const cfIp = headers.get('cf-connecting-ip');
+  if (cfIp) {
+    return cfIp;
+  }
 
+  // 2. 检查自定义 header
+  const customHeader = process.env.CLIENT_IP_HEADER;
   if (customHeader && headers.get(customHeader)) {
     return headers.get(customHeader);
   }
 
-  const header = IP_ADDRESS_HEADERS.find(name => {
-    return headers.get(name);
-  });
-
-  const ip = headers.get(header);
-
-  if (header === 'x-forwarded-for') {
-    return ip?.split(',')?.[0]?.trim();
+  // 3. 尝试从 x-forwarded-for 获取
+  const forwardedFor = headers.get('x-forwarded-for');
+  if (forwardedFor) {
+    // 返回第一个 IP（最原始的客户端 IP）
+    return forwardedFor.split(',')[0]?.trim();
   }
 
-  if (header === 'forwarded') {
-    const match = ip.match(/for=(\[?[0-9a-fA-F:.]+\]?)/);
-
-    if (match) {
-      return match[1];
+  // 4. 尝试其他常见的 IP headers
+  for (const name of IP_ADDRESS_HEADERS) {
+    const ip = headers.get(name);
+    if (ip) {
+      if (name === 'forwarded') {
+        const match = ip.match(/for=(\[?[0-9a-fA-F:.]+\]?)/);
+        if (match) {
+          return match[1];
+        }
+      }
+      return ip;
     }
   }
 
-  return ip;
+  return null;
 }
 
 export function getDevice(screen: string, os: string) {
